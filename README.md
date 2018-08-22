@@ -36,7 +36,13 @@ pip install "django<1.12" "selenium<4"
 Create a Django "project":
 
 ```
-django-admin.py startproject friendlypollsproject .
+django-admin.py startproject friendsvoteproject .
+```
+
+And then create a Django "app":
+
+```
+python manage.py startapp friendsvoteapp
 ```
 
 Dev server can be started with:

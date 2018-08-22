@@ -51,6 +51,13 @@ Dev server can be started with:
 python manage.py runserver
 ```
 
+Run tests with the following:
+
+```
+python functional_test.py # FT
+python manage.py tests # unit tests
+```
+
 Things to add to **.gitignore**:
 
 ```

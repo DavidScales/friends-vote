@@ -54,8 +54,9 @@ python manage.py runserver
 Run tests with the following:
 
 ```
-python functional_test.py # FT
-python manage.py tests # unit tests
+python manage.py test functional_tests/ # FT
+python manage.py test friendsvoteapp/ # unit tests
+python manage.py test # all
 ```
 
 Things to add to **.gitignore**:
@@ -67,3 +68,4 @@ virtualenv
 __pycache__
 *.pyc
 ```
+

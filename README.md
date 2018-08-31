@@ -69,3 +69,26 @@ __pycache__
 *.pyc
 ```
 
+### Migrations
+
+```
+# make, view, and apply migrations
+python manage.py makemigrations
+ls friendsvoteapp/migrations
+python manage.py migrate
+
+# remove and create fresh DB
+rm db.sqlite3
+python manage.py migrate --noinput
+```
+
+
+### One off chores
+
+```
+# upgrade selenium
+pip install --upgrade selenium
+
+# check gecko driver version
+geckodriver --version
+```

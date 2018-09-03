@@ -1,65 +1,83 @@
+from django.test import LiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import WebDriverException
+import time
 
-browser = webdriver.Firefox()
+MAX_WAIT = 10
 
-# Susan is wasting time on the internet and accidentally opens the
-# home page of Friends Vote
-browser.get('http://localhost:8000')
-assert 'Friends Vote' in browser.title
+class NewVisitorTest(LiveServerTestCase):
 
-## Sanity check
-# She sees that the page title and header mention friends and voting
+  def setUp(self):
+    self.browser = webdriver.Firefox()
 
-# and that there is some text prompting her to create a new poll for
-# her friends to vote on
+  def tearDown(self):
+    self.browser.quit()
 
-# She sees a single text box for creating a poll question
+  def test_user_can_create_poll(self):
 
-# She types "What pet should I get?" into the text box
+    # Susan is wasting time on the internet and accidentally opens the
+    # home page of Friends Vote
+    self.browser.get(self.live_server_url)
 
-# When she hits enter, two new text boxes appear, prompting her
-# for answers to her question
+    ## Sanity check
+    # She sees that the page title and header mention friends and voting
+    self.assertEqual('Friends Vote', self.browser.title)
+    header_text = self.browser.find_element_by_tag_name('h1').text
+    self.assertIn('Friends Vote', header_text)
 
-# She types "a cat" into the first box
+    self.fail('Expected failure: Finish the test!')
 
-# and "a dog" into the second box
+    # and that there is some text prompting her to create a new poll for
+    # her friends to vote on
 
-# She sees that there is a button for adding more answers
+    # She sees a single text box for creating a poll question
 
-# When she clicks it, a third text box appears
+    # She types "What pet should I get?" into the text box
 
-# She types "a lizard" into the third box
+    # When she hits enter, two new text boxes appear, prompting her
+    # for answers to her question
 
-# Though she is satisfied with her answers for now, she takes not that
-# the button for adding more answers is still there
+    # She types "a cat" into the first box
 
-# She sees text telling her to press enter when she's finished
+    # and "a dog" into the second box
 
-# When she presses enter, she is redirected to a new page, and she
-# notices that the page contains a unique URL (vote)
+    # She sees that there is a button for adding more answers
 
-    ## What if she has 5 answer boxes but only 3 have text when she submits?
-    ## What if she doesn't submit any text, or only text for one answer?
+    # When she clicks it, a third text box appears
 
-# The page content has text that contains her question/poll
+    # She types "a lizard" into the third box
 
-# The page also contains her answers as radio input choices
+    # Though she is satisfied with her answers for now, she takes not that
+    # the button for adding more answers is still there
 
-# She chooses the third answer, "a lizard", and text appears prompting her to
-# press enter when she is ready to cast her vote
+    # She sees text telling her to press enter when she's finished
 
-# When she presses enter, she is redirected to a new page and she notices that
-# the page again contains a unique URL (results)
+    # When she presses enter, she is redirected to a new page, and she
+    # notices that the page contains a unique URL (vote)
 
-    ## What if she tries to submit without choosing an answer (front end and back end)
+        ## What if she has 5 answer boxes but only 3 have text when she submits?
+        ## What if she doesn't submit any text, or only text for one answer?
 
-# The page displays her question in a heading
+    # The page content has text that contains her question/poll
 
-# as well as each of the possible answers as list items
+    # The page also contains her answers as radio input choices
 
-# Next to each answer is a vote count
+    # She chooses the third answer, "a lizard", and text appears prompting her to
+    # press enter when she is ready to cast her vote
 
-# and a vote percentage
+    # When she presses enter, she is redirected to a new page and she notices that
+    # the page again contains a unique URL (results)
+
+        ## What if she tries to submit without choosing an answer (front end and back end)
+
+    # The page displays her question in a heading
+
+    # as well as each of the possible answers as list items
+
+    # Next to each answer is a vote count
+
+    # and a vote percentage
 
 
 ## new class - others can vote on a poll
